@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "assurance")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -56,7 +55,8 @@ public class UserController {
 
    //Donne les infos de l'utilisateur connecté
     @GetMapping(value = "/getuser")
-    @PreAuthorize("hasRole('ROLE_USER')")
+
+  //  @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<ApiSucessReponse> getuser(Principal principal) throws CustomException {
         User user = userService.getUserByEmail(principal.getName());
         if(user==null)
@@ -89,6 +89,7 @@ public class UserController {
             throw new CustomException("Login ou de mot de passe indefini!");
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getLogin(),user.getPassword()));
         final MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        System.out.println(userDetails);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final String token = jwtTokenUtil.generateToken(userDetails);
         final Date date = jwtTokenUtil.generateExpirationDate();
