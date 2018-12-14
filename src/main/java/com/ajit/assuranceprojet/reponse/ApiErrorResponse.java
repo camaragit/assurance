@@ -25,7 +25,7 @@ public class ApiErrorResponse {
 
     @Override
     public String toString() {
-        return "ApiErrorResponse{" +
+        return "ApiErrorResponse:{" +
                 "status=" + status +
                 ", code=" + code +
                 ", message=" + message +

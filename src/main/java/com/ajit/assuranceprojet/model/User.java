@@ -34,5 +34,8 @@ public class User implements Serializable {
     private String telephone;
     @JsonIgnore
     private Date createdDate;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Collection<Souscription> souscription;
     public User(){}
 }

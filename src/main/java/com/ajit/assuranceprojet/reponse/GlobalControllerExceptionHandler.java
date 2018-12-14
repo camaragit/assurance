@@ -23,7 +23,7 @@ public class GlobalControllerExceptionHandler {
         return new ApiErrorResponse(500, 5001, ex.getMessage());
     }
     @ExceptionHandler(value = { CustomException.class })
-   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+   @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiErrorResponse monexeception(CustomException ex) {
         return new ApiErrorResponse(500, 5001, ex.getMessage());
     }
@@ -71,24 +71,29 @@ public class GlobalControllerExceptionHandler {
     }
 
     @ExceptionHandler(value = {org.hibernate.exception.ConstraintViolationException.class })
-    @ResponseStatus(HttpStatus.LOCKED)
+    @ResponseStatus(HttpStatus.CONFLICT)
     public ApiErrorResponse problmcontrainte(org.hibernate.exception.ConstraintViolationException ex) {
         return new ApiErrorResponse(400, 4041, "La requête ne peut être traitée à cause d'une contrainte d'integrite");
     }
     @ExceptionHandler(value = {org.springframework.dao.DataIntegrityViolationException.class })
-    @ResponseStatus(HttpStatus.LOCKED)
+    @ResponseStatus(HttpStatus.CONFLICT)
     public ApiErrorResponse problmcontrainte(org.springframework.dao.DataIntegrityViolationException ex) {
         return new ApiErrorResponse(400, 4041, "La requête ne peut être traitée à cause d'une contrainte d'integrite");
     }
     @ExceptionHandler(value = {HttpMediaTypeNotSupportedException.class })
-    @ResponseStatus(HttpStatus.LOCKED)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiErrorResponse problformat(HttpMediaTypeNotSupportedException ex) {
         return new ApiErrorResponse(400, 4041, "Le format de la requête n'est pas supportée !");
     }
     @ExceptionHandler(value = {HttpRequestMethodNotSupportedException.class })
-    @ResponseStatus(HttpStatus.LOCKED)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiErrorResponse methodeNotSupporte(HttpRequestMethodNotSupportedException ex) {
         return new ApiErrorResponse(400, 4041, "La méthode n'existe pas pour ce endPoind !");
+    }
+    @ExceptionHandler(value = {NullPointerException.class })
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiErrorResponse nullpointeur(NullPointerException ex) {
+        return new ApiErrorResponse(400, 4041, "Une des infos necessaires est manquante !");
     }
 
 /*

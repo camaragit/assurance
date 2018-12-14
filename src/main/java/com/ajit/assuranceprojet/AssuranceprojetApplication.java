@@ -51,36 +51,42 @@ public class AssuranceprojetApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		Profil role1 = new Profil("ADMIN","role admin");
-		Profil role2 = new Profil("USER","role user");
+		try {
+			Profil role1 = new Profil("ADMIN","role admin");
+			Profil role2 = new Profil("USER","role user");
 
-		profilRepository.save(role1);
-		profilRepository.save(role2);
-		Collection<Profil> rolesUser1 = new ArrayList<>();
-		Collection<Profil> rolesUser2 = new ArrayList<>();
-		rolesUser1.add(role1);
-		rolesUser2.add(role2);
+			profilRepository.save(role1);
+			profilRepository.save(role2);
+			Collection<Profil> rolesUser1 = new ArrayList<>();
+			Collection<Profil> rolesUser2 = new ArrayList<>();
+			rolesUser1.add(role1);
+			rolesUser2.add(role2);
 
-		User user1 = new User();
+			User user1 = new User();
 
-		user1.setActive(true);
-		user1.setLogin("ajit");
-		user1.setPassword("ajit@2018");
-		user1.setPrenom("AJIT");
-		user1.setNom("AJIT");
-		user1.setRoles(rolesUser2);
+			user1.setActive(true);
+			user1.setLogin("ajit");
+			user1.setPassword("ajit@2018");
+			user1.setPrenom("AJIT");
+			user1.setNom("AJIT");
+			user1.setRoles(rolesUser2);
 
-		User user2 = new User();
+			User user2 = new User();
 
-		user2.setActive(true);
-		user2.setLogin("dame");
-		user2.setPassword("dame");
-		user2.setPrenom("Dame");
-		user2.setNom("camara");
-		user2.setRoles(rolesUser1);
+			user2.setActive(true);
+			user2.setLogin("dame");
+			user2.setPassword("dame");
+			user2.setPrenom("Dame");
+			user2.setNom("camara");
+			user2.setRoles(rolesUser1);
 
-		userService.save(user1);
-		userService.save(user2);
+			userService.save(user1);
+			userService.save(user2);
+		}
+		catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+
 
 	}
 }

@@ -1,5 +1,4 @@
 package com.ajit.assuranceprojet.securite;
-
 import com.ajit.assuranceprojet.reponse.JwtAUthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,7 +24,6 @@ import org.springframework.security.web.csrf.CsrfFilter;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
 
     @Autowired
     @Qualifier("userDetailsService")
@@ -67,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf().disable().exceptionHandling().authenticationEntryPoint(jwtAUthenticationEntryPoint)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/").permitAll()
                 .antMatchers("/inscription").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
