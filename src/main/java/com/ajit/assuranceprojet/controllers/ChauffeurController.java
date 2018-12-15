@@ -7,6 +7,7 @@ import com.ajit.assuranceprojet.model.*;
 import com.ajit.assuranceprojet.reponse.ApiSucessReponse;
 import com.ajit.assuranceprojet.reponse.CustomException;
 import com.ajit.assuranceprojet.service.UserService;
+import com.ajit.assuranceprojet.utils.JwtTokenUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,8 +135,7 @@ public class ChauffeurController {
 
             souscription.setPrixSouscription(actualObj.get("prix").asLong());
             souscription.setVoiture(voiture);
-            Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            User user = userService.getUserByEmail(principal.getName());
+            User user = userService.getUserByEmail(JwtTokenUtil.EMAIL);
             souscription.setUser(user);
             Souscription souscrpt = souscriptionRepo.save(souscription);
             if(souscrpt==null) throw new CustomException("Impsossible d'enregistrée la souscription");
