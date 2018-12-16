@@ -26,7 +26,6 @@ public class AssuranceprojetApplication implements CommandLineRunner{
 	ProfilRepository profilRepository;
 	@Autowired
 	UserService userService;
-
 	public static void main(String[] args) {
 		SpringApplication.run(AssuranceprojetApplication.class, args);
 

@@ -19,6 +19,7 @@ public class JwtTokenUtil implements Serializable {
     private String CLAM_KEY_USERNAME = "sub";
     private String CLAM_KEY_AUDIENCE = "audience";
     private String CLAM_KEY_CDREATED = "created";
+    public static String EMAIL="";
     @Value("${jwt.secret}")
     private String secret;
     @Value("${jwt.expiration}")

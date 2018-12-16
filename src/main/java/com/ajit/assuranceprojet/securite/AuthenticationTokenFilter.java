@@ -43,6 +43,7 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
             System.out.println("userDetails "+userDetails.getUsername());
             boolean isValid = jwtTokenUtil.validateToken(autToken,userDetails);
             if(isValid){
+                JwtTokenUtil.EMAIL = username;
                 System.out.println("Validite Ok");
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
