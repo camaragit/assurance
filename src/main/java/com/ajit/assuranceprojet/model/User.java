@@ -35,7 +35,7 @@ public class User implements Serializable {
     @JsonIgnore
     private Date createdDate;
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Souscription> souscription;
     public User(){}
 }
