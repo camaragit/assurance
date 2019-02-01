@@ -28,4 +28,5 @@ public class Souscription implements Serializable {
     private Voiture voiture;
     @ManyToOne
     private User user;
+    private String police;
 }
