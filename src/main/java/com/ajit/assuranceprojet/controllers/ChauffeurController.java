@@ -132,6 +132,7 @@ public class ChauffeurController {
                 throw new CustomException("La date de debut doit être supérieure à la date de fin");
 
             souscription.setPrixSouscription(actualObj.get("prix").asLong());
+            souscription.setPolice(actualObj.get("police").asText());
             souscription.setVoiture(voiture);
             User user = userService.getUserByEmail(JwtTokenUtil.EMAIL);
             souscription.setUser(user);
