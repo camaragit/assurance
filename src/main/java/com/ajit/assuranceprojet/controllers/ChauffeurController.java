@@ -48,7 +48,6 @@ public class ChauffeurController {
         voiture.setTypeCarburant(value.getTypeCarburant());
         voiture.setUsage(value.getUsage());
         voitureRepo.save(voiture);
-
         Map<String,Object> map = new HashMap<>();
          map.put("voiture",voiture);
         ApiSucessReponse reponse = new ApiSucessReponse("Modification effectuée avec succès",map);
