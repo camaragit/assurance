@@ -30,6 +30,30 @@ public class ChauffeurController {
     private SouscriptionRepo souscriptionRepo;
     @Autowired
     private UserService userService;
+    @PutMapping(value = "chauffeur")
+    public ResponseEntity<ApiSucessReponse> updateChauffeur(@RequestBody Voiture value) throws CustomException {
+        Chauffeur chauffeur = value.getChauffeur();
+        Chauffeur chauffeurtoUpdate = chauffeurRepo.getChauffeurByNfcid(chauffeur.getNfcid());
+        chauffeurtoUpdate.setNom(chauffeur.getNom());
+        chauffeurtoUpdate.setPrenom(chauffeur.getPrenom());
+        chauffeurtoUpdate.setTelephone(chauffeur.getTelephone());
+        chauffeurtoUpdate.setProprietaire(chauffeur.getProprietaire());
+        chauffeurRepo.save(chauffeurtoUpdate);
+        Voiture voiture =voitureRepo.getVoitureByMatricule(value.getMatricule());
+        voiture.setChauffeur(chauffeurtoUpdate);
+        voiture.setMarque(value.getMarque());
+        voiture.setModel(value.getModel());
+        voiture.setNombrePlaces(value.getNombrePlaces());
+        voiture.setPuissance(value.getPuissance());
+        voiture.setTypeCarburant(value.getTypeCarburant());
+        voiture.setUsage(value.getUsage());
+        voitureRepo.save(voiture);
+
+        Map<String,Object> map = new HashMap<>();
+         map.put("voiture",voiture);
+        ApiSucessReponse reponse = new ApiSucessReponse("Modification effectuée avec succès",map);
+        return new ResponseEntity<ApiSucessReponse>(reponse, HttpStatus.OK);
+    }
 
     @PostMapping(value = "/savevoiture")
     public ResponseEntity<ApiSucessReponse> saveChauffeur(@RequestBody Voiture value) throws CustomException {

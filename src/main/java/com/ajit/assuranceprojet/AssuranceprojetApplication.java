@@ -22,6 +22,7 @@ import java.util.Collection;
 @SpringBootApplication
 @EnableWebMvc
 public class AssuranceprojetApplication implements CommandLineRunner{
+	
 	@Autowired
 	ProfilRepository profilRepository;
 	@Autowired

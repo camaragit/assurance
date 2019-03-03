@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface VoitureRepo extends JpaRepository<Voiture,Long> {
     public List<Voiture> findByChauffeur(Chauffeur chauffeur);
+    public Voiture getVoitureByMatricule(String mat);
 }

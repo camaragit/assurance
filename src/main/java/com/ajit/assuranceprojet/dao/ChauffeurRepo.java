@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface ChauffeurRepo extends JpaRepository<Chauffeur,Long> {
     public List<Chauffeur> findByNfcid(String nfcId);
+    public Chauffeur getChauffeurByNfcid(String nfcId);
 
 }
